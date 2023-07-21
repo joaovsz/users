@@ -1,0 +1,16 @@
+.container{
+    width: 70vw;
+    height: 3rem;
+    border-top: 1px solid black;
+    margin: 1rem auto;
+    display: flex;
+justify-content: flex-start;
+    align-items: center;
+}
+.ul{
+    list-style-type: none;
+    display: flex;
+}
+.lista{
+    padding: 0 1rem;
+}
