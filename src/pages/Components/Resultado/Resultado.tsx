@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./Resultado.module.css";
-
 import { User } from "@/types/User";
 import {
   Paper,
@@ -12,30 +11,17 @@ import {
   TableRow,
 } from "@mui/material";
 
-const initialValue = [{} as User];
+import { UsersContext } from "@/context/UserContext";
+
+
 const Resultado = () => {
-  const [users, setUsers] = useState<User[]>(initialValue);
-  const [aux, setAux] = useState(false);
-  useEffect(() => {
-    // getUsers()
-  }, [aux]);
-
-  // async function getUsers() {
-  //         await fetch('http://localhost:8080/users')
-  //             .then((async response => await response.json())).then( async response=>
-  //             {
-  //                 const usersR = await response
-  //                 setUsers(usersR)
-  //                 console.log(users)
-  //                }
-
-  //     )
-
-  //     }
-
+ 
+  const {users} = useContext(UsersContext)
+const {filteredUsers} = useContext(UsersContext)      
   return (
-    <div className={styles.container}>
-      {/* <button onClick={()=>setAux(!aux)}>At</button> */}
+  
+     <div className={styles.container}>
+    
       <TableContainer
         sx={{ height: "25rem", overflowY: "scroll" }}
         component={Paper}
@@ -53,9 +39,20 @@ const Resultado = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users.map((row) => (
+            {filteredUsers.id?(<TableRow
+                key={filteredUsers.id}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                {/* <TableCell align="right">{row.department.name}</TableCell> */}
+                <TableCell align="right">{filteredUsers.id}</TableCell>
+                <TableCell align="right">{filteredUsers.name}</TableCell>
+                <TableCell align="right">{filteredUsers.email}</TableCell>
+                <TableCell align="right">
+                  {filteredUsers.ativo ? "Ativo" : "Inativo"}
+                </TableCell>
+              </TableRow>):users.map((row) => (
               <TableRow
-                key={row.id}
+                key={filteredUsers.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 {/* <TableCell align="right">{row.department.name}</TableCell> */}
@@ -71,6 +68,7 @@ const Resultado = () => {
         </Table>
       </TableContainer>
     </div>
+ 
   );
 };
 

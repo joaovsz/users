@@ -1,8 +1,8 @@
 export type User = {
-  ativo?: Boolean;
+  ativo: Boolean;
   department: {};
   email: string;
-  id?: number;
+  id: number;
   name: string;
 };
 export type Department = {

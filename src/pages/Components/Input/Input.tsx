@@ -1,23 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./Input.module.css";
 import { InputAdornment, TextField } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
+import Resultado from "../Resultado/Resultado";
+import { User } from "@/types/User";
+import { UsersContext } from "@/context/UserContext";
+const initialValue = [{} as User];
 
 const Input = () => {
-  const [id, setId] = useState("");
+  const { getUserById, handleId, id } = useContext(UsersContext)
+  
+  // async function getUsers(id: string) {
+  //   fetch(`http://localhost:8080/users/${id}`)
+  //     .then((response) => response.json())
+  //     .then((response) => console.log(response));
+   
+  // }
 
-  async function getUsers(id: string) {
-    fetch(`http://localhost:8080/users/${id}`)
-      .then((response) => response.json())
-      .then((response) => console.log(response));
-  }
-
-  function handleId(e: string) {
-    console.log(e);
-    setId(e);
-  }
+  
 
   return (
     <div className={styles.container}>
@@ -44,7 +46,7 @@ const Input = () => {
           />
 
           <IconButton
-            onClick={() => getUsers(id)}
+            onClick={() => getUserById(id)}
             sx={{
               marginLeft: ".8rem",
               padding: "0 .2rem",
@@ -62,6 +64,7 @@ const Input = () => {
           </IconButton>
         </form>
       </section>
+    
     </div>
   );
 };

@@ -17,11 +17,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <body className={inter.className}>
+     
         <Navbar typePage={"Pesquisar"} />
         <Input />
-        <Resultado />
-      </body>
+        <Resultado/>
+      
     </>
   );
 }
