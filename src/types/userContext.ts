@@ -3,7 +3,7 @@ import { User } from "./User";
 export type userContext = {
     users: User[]
     filteredUsers: User
-    id: String
+    id: string
     getUsers: () => void;
     handleId: (e: string) => void;
     getUserById: (id:string) => void;

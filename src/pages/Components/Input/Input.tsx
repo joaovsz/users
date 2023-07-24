@@ -11,15 +11,7 @@ const initialValue = [{} as User];
 
 const Input = () => {
   const { getUserById, handleId, id } = useContext(UsersContext)
-  
-  // async function getUsers(id: string) {
-  //   fetch(`http://localhost:8080/users/${id}`)
-  //     .then((response) => response.json())
-  //     .then((response) => console.log(response));
-   
-  // }
-
-  
+ 
 
   return (
     <div className={styles.container}>
