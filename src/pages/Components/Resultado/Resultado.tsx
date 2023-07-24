@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import styles from "./Resultado.module.css";
-import { User } from "@/types/User";
+import { Department, User, UserFiltered } from "@/types/User";
 import {
+  Checkbox,
   Paper,
   Table,
   TableBody,
@@ -15,8 +16,7 @@ import { UsersContext } from "@/context/UserContext";
 
 
 const Resultado = () => {
- 
-  const {users} = useContext(UsersContext)
+const {users} = useContext(UsersContext)
 const {filteredUsers} = useContext(UsersContext)      
   return (
   
@@ -32,10 +32,11 @@ const {filteredUsers} = useContext(UsersContext)
         >
           <TableHead>
             <TableRow>
-              <TableCell align="right">Matrícula</TableCell>
-              <TableCell align="right">Nome Completo&nbsp;</TableCell>
-              <TableCell align="right">Email&nbsp;</TableCell>
-              <TableCell align="right">Situação&nbsp;</TableCell>
+              <TableCell align="center">Departamento</TableCell>
+              <TableCell align="center">Matrícula</TableCell>
+              <TableCell align="center">Nome Completo&nbsp;</TableCell>
+              <TableCell align="center">Email&nbsp;</TableCell>
+              <TableCell align="center">Situação&nbsp;</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -43,23 +44,23 @@ const {filteredUsers} = useContext(UsersContext)
                 key={filteredUsers.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                {/* <TableCell align="right">{row.department.name}</TableCell> */}
-                <TableCell align="right">{filteredUsers.id}</TableCell>
-                <TableCell align="right">{filteredUsers.name}</TableCell>
-                <TableCell align="right">{filteredUsers.email}</TableCell>
-                <TableCell align="right">
+                <TableCell align="center">{filteredUsers.department}</TableCell>
+                <TableCell align="center">{filteredUsers.id}</TableCell>
+                <TableCell align="center">{filteredUsers.name}</TableCell>
+                <TableCell align="center">{filteredUsers.email}</TableCell>
+                <TableCell align="center">
                   {filteredUsers.ativo ? "Ativo" : "Inativo"}
                 </TableCell>
-              </TableRow>):users.map((row) => (
+            </TableRow>) : users.map((row: UserFiltered) => (               
               <TableRow
-                key={filteredUsers.id}
+                key={row.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                {/* <TableCell align="right">{row.department.name}</TableCell> */}
-                <TableCell align="right">{row.id}</TableCell>
-                <TableCell align="right">{row.name}</TableCell>
-                <TableCell align="right">{row.email}</TableCell>
-                <TableCell align="right">
+                <TableCell align="center">{row.department}</TableCell>
+                <TableCell align="center">{row.id}</TableCell>
+                <TableCell align="center">{row.name}</TableCell>
+                <TableCell align="center">{row.email}</TableCell>
+                <TableCell align="center">
                   {row.ativo ? "Ativo" : "Inativo"}
                 </TableCell>
               </TableRow>

@@ -9,29 +9,23 @@ import {
   TextField,
 } from "@mui/material";
 import styles from "./FormCadastro.module.css";
-import { useState } from "react";
-import { User } from "@/types/User";
+import { UsersContext } from "@/context/UserContext";
+import { useContext } from "react";
 const FormCadastro = () => {
-  const [user, setUser] = useState<User>({} as User);
-  function handleChange(event: { target: { name: string; value: any } }) {
-    const { name, value } = event.target;
-    setUser((prevUser) => ({ ...prevUser, [name]: value }));
-    console.log(user);
-  }
-  function cadastraUsuario() {
-    fetch("http://localhost:8080/users", {});
-  }
+  const { userForm, cadastraUsuario, handleChangeForm } = useContext(UsersContext)
+
   return (
     <>
       <div className={styles.container}>
         <h3>Cadastrar Colaborador</h3>
         <form className={styles.form}>
           <TextField
-            onChange={handleChange}
-            value={user.name}
-            name="nome"
+            required
+            onChange={handleChangeForm}
+            value={userForm.name}
+            name="name"
             size={"small"}
-            id="outlined-basic"
+            id="outlined-controlled"
             label="Nome Completo"
             placeholder="Nome Completo"
             variant="outlined"
@@ -44,12 +38,13 @@ const FormCadastro = () => {
             }}
           />
           <TextField
-            onChange={handleChange}
-            value={user.email}
+            onChange={handleChangeForm}
+            value={userForm.email}
+            required
             name="email"
             type="email"
             size={"small"}
-            id="outlined-basic"
+            id="outlined-controlled"
             label="Email"
             placeholder="Email"
             variant="outlined"
@@ -68,9 +63,9 @@ const FormCadastro = () => {
             <Select
               labelId="demo-simple-select-required-label"
               id="demo-simple-select-required"
-              value={user?.department}
+              value={userForm?.department}
               label="Departamento *"
-              onChange={handleChange}
+              onChange={handleChangeForm}
               name="department"
             >
               <MenuItem value="">
@@ -80,7 +75,8 @@ const FormCadastro = () => {
               <MenuItem value={2}>Informática</MenuItem>
             </Select>
           </FormControl>
-          <IconButton
+          {userForm.name.length < 2 || userForm.email.length < 11 ? (<IconButton
+            disabled
             sx={{
               borderRadius: ".3rem",
               fontSize: ".8rem",
@@ -93,7 +89,22 @@ const FormCadastro = () => {
           >
             Cadastrar
             <Send sx={{ marginLeft: ".3rem" }} />
-          </IconButton>
+          </IconButton>) : (<IconButton
+            onClick={() => cadastraUsuario()}
+            sx={{
+              borderRadius: ".3rem",
+              fontSize: ".8rem",
+              fontWeight: "bold",
+              color: "white",
+              height: "100%",
+              background: "black",
+              "&:hover": { background: "#008000" },
+            }}
+          >
+            Cadastrar
+            <Send sx={{ marginLeft: ".3rem" }} />
+          </IconButton>)}
+
         </form>
       </div>
     </>

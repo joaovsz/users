@@ -1,13 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
-import styles from "./Input.module.css";
-import { InputAdornment, TextField } from "@mui/material";
-import { AccountCircle } from "@mui/icons-material";
-import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
-import Resultado from "../Resultado/Resultado";
-import { User } from "@/types/User";
 import { UsersContext } from "@/context/UserContext";
-const initialValue = [{} as User];
+import { AccountCircle } from "@mui/icons-material";
+import SearchIcon from "@mui/icons-material/Search";
+import { InputAdornment, TextField } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import React, { useContext } from "react";
+import styles from "./Input.module.css";
+
 
 const Input = () => {
   const { getUserById, handleId, id } = useContext(UsersContext)
