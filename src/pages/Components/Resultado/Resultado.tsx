@@ -1,23 +1,27 @@
-import { useContext, useEffect, useState } from "react";
+import { UserFiltered } from "@/types/User";
+import { useContext } from "react";
 import styles from "./Resultado.module.css";
-import { Department, User, UserFiltered } from "@/types/User";
+
 import {
-  Checkbox,
   Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
-  TableRow,
+  TableRow
 } from "@mui/material";
 
 import { UsersContext } from "@/context/UserContext";
+import AlertDialog from "../Dialog/Dialog";
 
 
 const Resultado = () => {
 const {users} = useContext(UsersContext)
-const {filteredUsers} = useContext(UsersContext)      
+  const { filteredUsers } = useContext(UsersContext)     
+ function verId(id:string) {
+       console.log(id)
+   }
   return (
   
      <div className={styles.container}>
@@ -50,9 +54,15 @@ const {filteredUsers} = useContext(UsersContext)
                 <TableCell align="center">{filteredUsers.email}</TableCell>
                 <TableCell align="center">
                   {filteredUsers.ativo ? "Ativo" : "Inativo"}
+              </TableCell>
+              <TableCell align="center">
+                               
+                  <AlertDialog name={filteredUsers.name} key={filteredUsers.id} />
+              
                 </TableCell>
-            </TableRow>) : users.map((row: UserFiltered) => (               
+            </TableRow>) : users.map((row: UserFiltered, index) => (               
               <TableRow
+                onClick={()=>verId(row.id)}
                 key={row.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
@@ -62,6 +72,11 @@ const {filteredUsers} = useContext(UsersContext)
                 <TableCell align="center">{row.email}</TableCell>
                 <TableCell align="center">
                   {row.ativo ? "Ativo" : "Inativo"}
+                </TableCell>
+                <TableCell align="center">
+                               
+                  <AlertDialog key={row.id} name={row.name}  />
+              
                 </TableCell>
               </TableRow>
             ))}
