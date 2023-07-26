@@ -35,3 +35,10 @@ a {
   border-radius: 2px;
   border: 3px solid #ffffff;
 }
+.css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop {
+  background-color: rgba(0, 0, 0, 0.068);
+}
+
+.MuiPaper-root {
+  box-shadow: 0px 11px 15px -7px rgba(71, 71, 71, 0.068), 0px 24px 38px 3px rgba(126, 126, 126, 0.048), 0px 9px 46px 8px rgba(0, 0, 0, 0.021);
+}

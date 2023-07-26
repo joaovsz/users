@@ -12,39 +12,37 @@
   display: flex;
   background: white;
 }
-.listaCad {
-  color: black;
-  background-color: white;
+.pesquisar {
   border-radius: 0.5rem;
   height: 2.5rem;
   display: flex;
   align-items: center;
-  font-weight: thin;
-  padding: 0 0.5rem;
-}
-.listaCad:first-child {
-  color: white;
   background-color: black;
-  border-radius: 0.5rem;
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-  font-weight: thin;
-  padding: 0 0.5rem;
+    color: white;
+      font-weight: thin;
+        padding: 0 0.5rem;
 }
 .list {
-  color: white;
-  background-color: black;
   border-radius: 0.5rem;
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-  font-weight: thin;
-  padding: 0 0.5rem;
+    height: 2.5rem;
+      display: flex;
+      align-items: center;
+      font-weight: thin;
+      padding: 0 0.5rem;
 }
-.list:first-child {
-  color: black;
-  background-color: white;
+.cadastrar {
+  background-color: black;
+  color: white;
+  border-radius: 0.5rem;
+    height: 2.5rem;
+      display: flex;
+      align-items: center;
+      font-weight: thin;
+      padding: 0 0.5rem;
+}
+.AtualizaçãoCadastral {
+  background-color: black;
+  color: white;
   border-radius: 0.5rem;
   height: 2.5rem;
   display: flex;

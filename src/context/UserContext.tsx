@@ -8,19 +8,22 @@ export function UserProvider(props: any) {
   const [users, setUsers] = useState<UserFiltered[]>(initialValue.users)
   const [filteredUsers, setFilteredUsers] = useState<UserFiltered>(initialValue.filteredUsers)
   const [id, setId] = useState(initialValue.id)
+  const [name, setName] = useState(initialValue.name)
   const [userForm, setUserForm] = useState<User>(initialValue.userForm);
+  // const [idPassed, setIdPassed] = useEffect(initialValue.)
  const [open, setOpen] = useState(initialValue.open);
-
   useEffect(() => {
     getUsers()
   }, [open])
+  
 
+  useEffect(() => { }, [])
+  
   function handleChangeForm(event: { target: { name: string; value: string } }) {
     const { name, value } = event.target;
-
     setUserForm((prevUser) => ({ ...prevUser, [name]: value }));
-
   }
+
 
   async function getUsers() {
     await fetch('http://localhost:8080/users')
@@ -29,7 +32,7 @@ export function UserProvider(props: any) {
         const userF: User[] = response
         const userFiltered = userF.map((response: User) => ({ ...response, department: response.department ? response.department.name : null }))
         setUsers(userFiltered)
-        
+        console.log(users)
       },
       )
   }
@@ -45,7 +48,7 @@ export function UserProvider(props: any) {
           name: userForm.name,
         }),
       })
-
+      setUserForm(initialValue.userForm)
 
   }
 
@@ -65,9 +68,12 @@ export function UserProvider(props: any) {
     
 
   }
-  const handleClickOpen = () => {
-   
-   setOpen(true);
+  const handleClickOpen = (id:string, name:string) => {
+    setOpen(true);
+    setId(id)
+    const filteredId = users.filter((prev: UserFiltered) => prev.id == id)
+    setName(name)
+    console.log(name)
   
   };
 
@@ -77,9 +83,10 @@ export function UserProvider(props: any) {
 
 
   
-  async function deleteUser(key: string) {
+  async function deleteUser(name: string) {
+
     
-    await fetch(`http://localhost:8080/users/delete/${key}`, {
+    await fetch(`http://localhost:8080/users/delete/${id}`, {
       method: "DELETE"
     })
       .then(response => {
@@ -89,5 +96,5 @@ export function UserProvider(props: any) {
       
   }
 
-  return (<UsersContext.Provider value={{ users,open, handleChangeForm, handleClickOpen, handleClose, cadastraUsuario, deleteUser, userForm, filteredUsers, id, handleId, getUserById, getUsers }}> {props.children} </UsersContext.Provider>)
+  return (<UsersContext.Provider value={{ users,open, name,handleChangeForm, handleClickOpen, handleClose, cadastraUsuario, deleteUser, userForm, filteredUsers, id, handleId, getUserById, getUsers }}> {props.children} </UsersContext.Provider>)
 }

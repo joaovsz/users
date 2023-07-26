@@ -4,12 +4,13 @@ export type userContext = {
     users: UserFiltered[]
     filteredUsers: UserFiltered
     id: string
+    name: string
     open: boolean
     userForm: User
     getUsers: () => void;
-    handleClickOpen:()=>void
+    handleClickOpen:(id:string, name:string )=>void
     handleClose: () => void
-    deleteUser:(key:string)=> void
+    deleteUser:(id:string)=> void
     handleId: (e: string) => void;
     getUserById: (id: string) => void;
     cadastraUsuario: () => void
@@ -21,6 +22,7 @@ export const initialValue ={
     users: [{} as UserFiltered],
     filteredUsers: {} as UserFiltered,
     id: '',
+    name:'',
     open: false,
     userForm: {name:'', email: '', department:{id:'', name:''} } as User,
     getUsers: () => { },

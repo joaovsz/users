@@ -9,41 +9,41 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton } from '@mui/material';
 import { UsersContext } from '@/context/UserContext';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 
-export default function AlertDialog(props:{name: string, key:string}) {
+export default function AlertDialog(props:{name: string, id:string}) {
    
-    const { open,deleteUser, handleClickOpen, handleClose } = React.useContext(UsersContext)
-    
-   
-
+    const { open,deleteUser, handleClickOpen, name,handleClose } = useContext(UsersContext)
+ 
 
   return (
-    <div>
-      <IconButton  onClick={()=>handleClickOpen()}>
+   <>
+      <IconButton onClick={()=>handleClickOpen(props.id, props.name)}>
             <DeleteIcon />
     </IconButton>
-      <Dialog
+          <Dialog
+              
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-      >
+        >
         <DialogTitle id="alert-dialog-title">
           {"Remover Colaborador"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-           {`Você tem certeza que quer remover ${props.name} do banco de dados? Essa ação não pode ser desfeita!`}
+           {`Você tem certeza que quer remover ${name} do banco de dados? Essa ação não pode ser desfeita!`}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>CANCELAR</Button>
-          <Button onClick={()=>deleteUser(props.key)} autoFocus>
+          <Button onClick={()=>deleteUser(props.id)} autoFocus>
             EXCLUIR
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+   
+          </>
   );
 }

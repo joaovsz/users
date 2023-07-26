@@ -1,27 +1,27 @@
 import { UserFiltered } from "@/types/User";
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useContext } from "react";
 import styles from "./Resultado.module.css";
 
 import {
-  Paper,
+  IconButton, Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow
-} from "@mui/material";
+} from '@mui/material';
 
 import { UsersContext } from "@/context/UserContext";
 import AlertDialog from "../Dialog/Dialog";
+import { RemoveFromQueue } from "@mui/icons-material";
 
 
 const Resultado = () => {
-const {users} = useContext(UsersContext)
-  const { filteredUsers } = useContext(UsersContext)     
- function verId(id:string) {
-       console.log(id)
-   }
+  const { filteredUsers,users, deleteUser } = useContext(UsersContext)     
+ 
+ 
   return (
   
      <div className={styles.container}>
@@ -57,12 +57,12 @@ const {users} = useContext(UsersContext)
               </TableCell>
               <TableCell align="center">
                                
-                  <AlertDialog name={filteredUsers.name} key={filteredUsers.id} />
+                  <AlertDialog name={filteredUsers.name} id={filteredUsers.id} />
               
                 </TableCell>
-            </TableRow>) : users.map((row: UserFiltered, index) => (               
+            </TableRow>) : users.map((row: UserFiltered) => (               
               <TableRow
-                onClick={()=>verId(row.id)}
+          
                 key={row.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
@@ -75,7 +75,8 @@ const {users} = useContext(UsersContext)
                 </TableCell>
                 <TableCell align="center">
                                
-                  <AlertDialog key={row.id} name={row.name}  />
+          
+                  <AlertDialog name={row.name} id={row.id} />
               
                 </TableCell>
               </TableRow>
