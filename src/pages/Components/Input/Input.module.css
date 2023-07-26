@@ -1,8 +1,9 @@
 .containerInput {
   display: flex;
-  align-items: right;
+  align-items: center;
   justify-content: flex-start;
   margin: 0.8rem 0;
+  width: 70vw;
 }
 
 .container {
@@ -13,7 +14,10 @@
   flex-direction: column;
   margin-left: 15vw;
 }
-
+.helper {
+  margin-left: 1rem;
+  width: 100%;
+}
 .form {
   height: 100%;
   display: flex;

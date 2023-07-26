@@ -7,7 +7,7 @@ import React, { useContext } from "react";
 import styles from "./Input.module.css";
 
 
-const Input = () => {
+const Input = (props:{helper:string}) => {
   const { getUserById, handleId, id } = useContext(UsersContext)
  
 
@@ -53,6 +53,7 @@ const Input = () => {
             />
           </IconButton>
         </form>
+        <span className={styles.helper }>{props.helper}</span>
       </section>
     
     </div>

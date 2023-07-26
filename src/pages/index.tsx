@@ -19,7 +19,7 @@ export default function Home() {
       </Head>
       <Header />
         <Navbar typePage={"Pesquisar"} />
-        <Input />
+      <Input helper={ "Digite o número da matrícula para pesquisa"} />
         <Resultado/>
       
     </>
