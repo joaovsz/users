@@ -12,8 +12,9 @@ export type userContext = {
     handleClose: () => void
     deleteUser:(id:string)=> void
     handleId: (e: string) => void;
-    getUserById: (id: string) => void;
+    getUserById: (id: string) => void
     cadastraUsuario: () => void
+    updateInfo:(id:string)=> void
     handleChangeForm: (event: { target: { name: string; value: any } }) => void
     
 }
@@ -26,6 +27,7 @@ export const initialValue ={
     open: false,
     userForm: {name:'', email: '', department:{id:'', name:''} } as User,
     getUsers: () => { },
+    updateInfo:()=>{},
     handleId: () => { },
     getUserById: () => { },
     deleteUser: () => { },

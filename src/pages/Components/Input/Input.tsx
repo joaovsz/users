@@ -15,7 +15,10 @@ const Input = (props:{helper:string}) => {
     <div className={styles.container}>
       <h3>Colaboradores</h3>
       <section className={styles.containerInput}>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={(e) => {
+          e.preventDefault()
+          getUserById(id)
+        } }>
           <TextField
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               handleId(event.target.value)
@@ -36,7 +39,8 @@ const Input = (props:{helper:string}) => {
           />
 
           <IconButton
-            onClick={() => getUserById(id)}
+            type="submit"
+           
             sx={{
               marginLeft: ".8rem",
               padding: "0 .2rem",

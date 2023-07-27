@@ -10,29 +10,29 @@ export function UserProvider(props: any) {
   const [id, setId] = useState(initialValue.id)
   const [name, setName] = useState(initialValue.name)
   const [userForm, setUserForm] = useState<User>(initialValue.userForm);
-  // const [idPassed, setIdPassed] = useEffect(initialValue.)
- const [open, setOpen] = useState(initialValue.open);
+  const [open, setOpen] = useState(initialValue.open);
   useEffect(() => {
     getUsers()
   }, [open])
+
+
   
 
-  useEffect(() => { }, [])
-  
   function handleChangeForm(event: { target: { name: string; value: string } }) {
     const { name, value } = event.target;
     setUserForm((prevUser) => ({ ...prevUser, [name]: value }));
+    setFilteredUsers((prevUser) => ({ ...prevUser, [name]: value }))
+   console.log(filteredUsers.department)
   }
 
 
   async function getUsers() {
     await fetch('http://localhost:8080/users')
-      .then((async response => await response.json())).then(async (response: User[]) => {
-
-        const userF: User[] = response
-        const userFiltered = userF.map((response: User) => ({ ...response, department: response.department ? response.department.name : null }))
+      .then((async response => await response.json())).then((response: User[]) => {
+         const userF: User[] = response;
+        const userFiltered =  userF.map((response: User) => ({ ...response, department: response.department.id ? response.department.name : null }))
         setUsers(userFiltered)
-        console.log(users)
+    
       },
       )
   }
@@ -48,7 +48,7 @@ export function UserProvider(props: any) {
           name: userForm.name,
         }),
       })
-      setUserForm(initialValue.userForm)
+    setUserForm(initialValue.userForm)
 
   }
 
@@ -62,30 +62,46 @@ export function UserProvider(props: any) {
     fetch(`http://localhost:8080/users/${id}`)
       .then((response) => response.json())
       .then((response) => {
-
-        setFilteredUsers({ ...response, department: response.department ? response.department.name : null })
+        setFilteredUsers({ ...response, department: response.department ? response.department.id : null })
+       
       });
-    
+
 
   }
-  const handleClickOpen = (id:string, name:string) => {
+  const handleClickOpen = (id: string, name: string) => {
     setOpen(true);
     setId(id)
-    const filteredId = users.filter((prev: UserFiltered) => prev.id == id)
     setName(name)
     console.log(name)
-  
+
   };
 
-  const handleClose = () => {
+  async function handleClose() {
     setOpen(false);
   };
 
+  const updateInfo = (id: string) => {
+    fetch(`http://localhost:8080/users/update/${id}`, {
+      headers: { 'Content-type': 'application/json', Accept: 'application/json' },
+      method: "PUT",
+      body: JSON.stringify({
+        "email": userForm.email ,
+        "name": userForm.name,
+        "ativo": userForm.ativo,
+        "department": {
+          id: filteredUsers.department,
+          name: filteredUsers.department=="1"?"Gestão":"Informática" }
+      })
+    }
+    )
+    setUserForm({} as User)
+    setFilteredUsers({} as UserFiltered)
+  }
 
-  
+
   async function deleteUser(name: string) {
 
-    
+
     await fetch(`http://localhost:8080/users/delete/${id}`, {
       method: "DELETE"
     })
@@ -93,8 +109,8 @@ export function UserProvider(props: any) {
         response.json()
         handleClose()
       })
-      
+
   }
 
-  return (<UsersContext.Provider value={{ users,open, name,handleChangeForm, handleClickOpen, handleClose, cadastraUsuario, deleteUser, userForm, filteredUsers, id, handleId, getUserById, getUsers }}> {props.children} </UsersContext.Provider>)
+  return (<UsersContext.Provider value={{ updateInfo,users, open, name, handleChangeForm, handleClickOpen, handleClose, cadastraUsuario, deleteUser, userForm, filteredUsers, id, handleId, getUserById, getUsers }}> {props.children} </UsersContext.Provider>)
 }

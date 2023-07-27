@@ -20,7 +20,7 @@ export default function Home() {
       <Header />
         <Navbar typePage={"Pesquisar"} />
       <Input helper={ "Digite o número da matrícula para pesquisa"} />
-        <Resultado/>
+      <Resultado page={"Pesquisa" } />
       
     </>
   );

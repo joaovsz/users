@@ -40,9 +40,9 @@ const FormCadastro = () => {
           <TextField
             onChange={handleChangeForm}
             value={userForm.email}
-            required
             name="email"
             type="email"
+            required
             size={"small"}
             id="outlined-controlled"
             label="Email"
