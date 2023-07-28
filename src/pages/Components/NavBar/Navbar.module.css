@@ -3,6 +3,7 @@
   height: 3rem;
   border-top: 1px solid black;
   margin: 1rem auto;
+  padding-top: 2rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
