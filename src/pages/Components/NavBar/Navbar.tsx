@@ -7,17 +7,24 @@ export const Navbar = (props: { typePage: string }) => {
       <ul className={styles.ul}>
         <li
           className={
-            props.typePage == "Pesquisar" ? styles.listaCad : styles.list
+            props.typePage == "Pesquisar" ? styles.pesquisar : styles.list
           }
         >
           <Link href="/">Pesquisar</Link>
         </li>
         <li
           className={
-            props.typePage == "Pesquisar" ? styles.listaCad : styles.list
+            props.typePage == "Cadastrar" ? styles.cadastrar : styles.list
           }
         >
           <Link href="/Cadastrar">Cadastrar</Link>
+        </li>
+        <li
+          className={
+            props.typePage == "Atualização Cadastral" ? styles.AtualizaçãoCadastral : styles.list
+          }
+        >
+          <Link href="/Atualizar">Atualização Cadastral</Link>
         </li>
       </ul>
     </div>

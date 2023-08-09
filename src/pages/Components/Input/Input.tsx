@@ -1,29 +1,24 @@
-import React, { useState } from "react";
-import styles from "./Input.module.css";
-import { InputAdornment, TextField } from "@mui/material";
+import { UsersContext } from "@/context/UserContext";
 import { AccountCircle } from "@mui/icons-material";
-import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
+import { InputAdornment, TextField } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import React, { useContext } from "react";
+import styles from "./Input.module.css";
 
-const Input = () => {
-  const [id, setId] = useState("");
 
-  async function getUsers(id: string) {
-    fetch(`http://localhost:8080/users/${id}`)
-      .then((response) => response.json())
-      .then((response) => console.log(response));
-  }
-
-  function handleId(e: string) {
-    console.log(e);
-    setId(e);
-  }
+const Input = (props:{helper:string}) => {
+  const { getUserById, handleId, id } = useContext(UsersContext)
+ 
 
   return (
     <div className={styles.container}>
       <h3>Colaboradores</h3>
       <section className={styles.containerInput}>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={(e) => {
+          e.preventDefault()
+          getUserById(id)
+        } }>
           <TextField
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               handleId(event.target.value)
@@ -44,7 +39,8 @@ const Input = () => {
           />
 
           <IconButton
-            onClick={() => getUsers(id)}
+            type="submit"
+           
             sx={{
               marginLeft: ".8rem",
               padding: "0 .2rem",
@@ -61,7 +57,9 @@ const Input = () => {
             />
           </IconButton>
         </form>
+        <span className={styles.helper }>{props.helper}</span>
       </section>
+    
     </div>
   );
 };
